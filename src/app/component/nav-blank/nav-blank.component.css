@@ -1,0 +1,25 @@
+.bdge
+{
+  --bs-badge-padding-x: .65em;
+    --bs-badge-padding-y: .35em;
+    --bs-badge-font-size: .75em;
+    --bs-badge-font-weight: 700;
+    --bs-badge-color: #fff;
+    --bs-badge-border-radius: var(--bs-border-radius);
+    display: inline-block;
+    padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
+    font-size: var(--bs-badge-font-size);
+    font-weight: var(--bs-badge-font-weight);
+    line-height: 1;
+    color:
+    /* var(--bs-badge-color) */
+    rgba(249, 36, 36, 0.823)    ;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: var(--bs-badge-border-radius);
+}
+.navbar{
+  /* z-index: 99999999; */
+  transition: all 1s;
+}

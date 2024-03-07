@@ -1,0 +1,69 @@
+<section class="bg-main-light p-3 rounded-3 my-5 w-75 mx-auto">
+  <div class="container py-5 my-5 p-5 rounded">
+    <div class="d-flex justify-content-between mb-4">
+      <h2 class="title">cart shop</h2>
+      <button
+        class="btn btn-primary btn-lg"
+        [routerLink]="['/payment', cartProduct._id]"
+      >
+        <a href=""></a>
+        check out
+      </button>
+      <!-- عند الضغط ع هذا الزر يتم ارسالك الي صفحة الدفع  -->
+    </div>
+
+    <p class="text-main">
+      <span class="text-black fw-bold">total price:</span>
+      {{ cartProduct.totalCartPrice | currency : "EGp" }}
+    </p>
+
+    <div
+      class="row border-bottom my-3 d-flex align-items-center p-2 ng-star-inserted"
+      *ngFor="let item of cartProduct.products"
+    >
+      <div class="col-md-2 mb-1">
+        <img [src]="item.product.imageCover" alt="" class="w-100" />
+      </div>
+      <div class="col-md-10">
+        <div class="d-flex justify-content-between">
+          <!-- details -->
+          <div>
+            <h3 class="fw-bold h4">{{ item.product.title }}</h3>
+            <p class="text-black fw-bold m-0">
+              {{ item.price | currency : "EGP" }}
+            </p>
+            <button
+              class="btn p-0 m-0 text-danger"
+              (click)="removeItem(item.product._id)"
+            >
+              <i class="fa-regular fa-trash-can fs-5"></i>
+              Remove
+            </button>
+          </div>
+          <!-- btns -->
+          <div>
+            <button
+              #btn1
+              class="btn border border-success"
+              (click)="
+                updateCount(item.product._id, item.count + 1, btn1, btn2)
+              "
+            >
+              +
+            </button>
+            <span> {{ item.count }} </span>
+            <button
+              #btn2
+              class="btn border border-success"
+              (click)="
+                updateCount(item.product._id, item.count - 1, btn1, btn2)
+              "
+            >
+              -
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

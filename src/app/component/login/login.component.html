@@ -1,0 +1,36 @@
+<section class=" my-5 p-1 rounded-1 w-100 mx-auto">
+<h1 class="title">Login Now</h1>
+<form class="ms-auto" [formGroup]="loginForm" (ngSubmit)="handellogForm()">
+
+  <div class="mb-2">
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email" class="form-control" #inputEmail>
+
+    <div class="alert alert-danger" *ngIf="loginForm.get('email')?.errors && (loginForm.get('email')?.touched || inputEmail.value.length > 0)">
+      <p *ngIf="loginForm.get('email')?.getError('required')">Email Required</p>
+      <p *ngIf="loginForm.get('email')?.getError('email')">Email must be valid</p>
+    </div>
+  </div>
+
+
+  <div class="mb-2">
+    <label for="password">Password:</label>
+    <input type="password"
+    id="password"
+    formControlName="password"
+    class="form-control"
+    #inputPassword>
+    <!-- validition -->
+    <div *ngIf="loginForm.get('password')?.errors && (loginForm.get('password')?.touched || inputPassword.value.length > 0)" class="alert alert-danger">
+      <p *ngIf="loginForm.get('password')?.getError('required')">Password required</p>
+      <p *ngIf="loginForm.get('password')?.getError('pattern')">Password must start with capital letter and contain last 6 letters</p>
+
+    </div>
+  </div>
+  <button [disabled]="loginForm.invalid" class="btn-main ms-auto d-block p-2">
+      <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i>
+      login now
+    </button>
+    <p *ngIf="msgError" class="alert alert-danger">{{msgError}}</p>
+</form>
+</section>

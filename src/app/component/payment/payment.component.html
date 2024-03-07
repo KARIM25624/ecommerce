@@ -1,0 +1,95 @@
+<section class="p-4 w-75 mx-auto rounded-3 my-5">
+  <form [formGroup]="checkout" (ngSubmit)="handelForm()">
+    <!-- detalis validitin -->
+    <div>
+      <label for="details">Details</label>
+      <input
+        type="text"
+        id="details"
+        class="form-control"
+        formControlName="details"
+        #inputdetails
+      />
+
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          checkout.get('details')?.errors &&
+          (checkout.get('details')?.touched || inputdetails.value.length > 0)
+        "
+      >
+        <p
+          class="alert alert-danger"
+          *ngIf="checkout.get('details')?.getError('required')"
+        >
+          Details Required
+        </p>
+        <p
+          class="alert alert-danger"
+          *ngIf="checkout.get('details')?.getError('minlength')"
+        >
+          minlenght 3
+        </p>
+      </div>
+    </div>
+    <!-- phone validition -->
+    <div>
+      <label for="phone">phone</label>
+      <input
+        type="tel"
+        id="phone"
+        class="form-control"
+        formControlName="phone"
+        #inputphone
+      />
+
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          checkout.get('phone')?.errors &&
+          (checkout.get('phone')?.touched || inputphone.value.length > 0)
+        "
+      >
+        <p
+          class="alert alert-danger"
+          *ngIf="checkout.get('phone')?.getError('required')"
+        >
+          phone Required
+        </p>
+        <p
+          class="alert alert-danger"
+          *ngIf="checkout.get('phone')?.getError('pattern')"
+        >
+          phone must be valid
+        </p>
+      </div>
+    </div>
+    <!-- city validitin -->
+    <div>
+      <label for="city">city</label>
+      <input
+        type="text"
+        id="city"
+        class="form-control"
+        formControlName="city"
+        #inputcity
+      />
+
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          checkout.get('city')?.errors &&
+          (checkout.get('city')?.touched || inputcity.value.length > 0)
+        "
+      >
+        <p
+          class="alert alert-danger"
+          *ngIf="checkout.get('city')?.getError('required')"
+        >
+          city Required
+        </p>
+      </div>
+    </div>
+    <button [disabled]="checkout.invalid" class="btn btn-outline-info w-100 my-3">pay now</button>
+  </form>
+</section>

@@ -1,0 +1,64 @@
+
+
+<!-- allproducts -->
+<section class="my-5">
+  <input
+    type="search"
+    class="form-control w-50 mx-auto my-4"
+    placeholder="search..."
+    [(ngModel)]="searchTerm"
+  />
+
+  <div class="container my-3">
+    <div class="row g-5">
+      <div class="col-md-3" *ngFor="let item of products | paginate: { id: 'productpaginate',
+                                                      itemsPerPage: pageSize,
+                                                      currentPage: currentPage,
+                                                      totalItems: total }| search : searchTerm">
+        <div class="product p-2 cursor-pointer">
+          <div [routerLink]="['/details', item._id]">
+            <img [src]="item.imageCover" [alt]="item.title" class="w-100" />
+            <h3 class="h6 text-main">{{ item.category.name | uppercase }}</h3>
+            <h4 class="h6 text-black fw-bold">
+              {{ item.title | termtext : 2 | lowercase }}
+            </h4>
+            <div class="d-flex justify-content-between align-items-center">
+              <span>{{ item.price }} EGp</span>
+              <span class="text-muted">
+                <i [class.rating-color]="item.ratingsAverage >= num" *ngFor="let num of [1,2,3,4,5]" class="fas fa-star rating-color"></i>
+                {{ item.ratingsAverage }}</span
+              >
+            </div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center">
+
+              <button class="btn-main w-100" (click)="addcart(item._id)">
+            Add Product
+             </button>
+             <i *ngIf="wishlistData.includes($any(item._id))" (click)="removeFav(item._id)" class="fas fa-heart-broken me-auto fw-bold heart-broken text-danger"></i>
+             <!-- remove -->
+        <i *ngIf="!wishlistData.includes($any(item._id))" (click)="fav(item._id)" class="fas fa-heart me-auto fw-bold heart"></i>
+        <!-- add -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- التنقل من صفحة الي اخري  -->
+  <div class="d-flex justify-content-center mt-4">
+    <pagination-controls  id="productpaginate"
+                      (pageChange)="pageChange($event)"
+                      (pageBoundsCorrection)="pageChange($event)"
+                      [maxSize]="9"
+                      [directionLinks]="true"
+                      [autoHide]="true"
+                      [responsive]="true"
+                      previousLabel="Previous"
+                      nextLabel="Next"
+                      screenReaderPaginationLabel="Pagination"
+                      screenReaderPageLabel="page"
+                      screenReaderCurrentLabel="You're on page">
+</pagination-controls>
+  </div>
+</section>
